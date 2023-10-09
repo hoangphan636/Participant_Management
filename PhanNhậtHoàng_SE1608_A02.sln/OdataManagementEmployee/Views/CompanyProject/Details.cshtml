@@ -1,0 +1,79 @@
+﻿@model BusinessObject.CompanyProject
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    .details-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .details-label {
+        flex-basis: 30%;
+    }
+
+    .details-value {
+        flex-basis: 70%;
+    }
+</style>
+
+<h1>Details</h1>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <div class="details-row">
+        <div class="details-label">
+            @Html.DisplayNameFor(model => model.CompanyProjectID)
+        </div>
+        <div class="details-value">
+            @Html.DisplayFor(model => model.CompanyProjectID)
+        </div>
+    </div>
+
+    <div class="details-row">
+        <div class="details-label">
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </div>
+        <div class="details-value">
+            @Html.DisplayFor(model => model.ProjectName)
+        </div>
+    </div>
+
+    <div class="details-row">
+        <div class="details-label">
+            @Html.DisplayNameFor(model => model.ProjectDescription)
+        </div>
+        <div class="details-value">
+            @Html.DisplayFor(model => model.ProjectDescription)
+        </div>
+    </div>
+
+    <div class="details-row">
+        <div class="details-label">
+            @Html.DisplayNameFor(model => model.EstimatedStartDate)
+        </div>
+        <div class="details-value">
+            @Html.DisplayFor(model => model.EstimatedStartDate)
+        </div>
+    </div>
+
+    <div class="details-row">
+        <div class="details-label">
+            @Html.DisplayNameFor(model => model.ExpectedEndDate)
+        </div>
+        <div class="details-value">
+            @Html.DisplayFor(model => model.ExpectedEndDate)
+        </div>
+    </div>
+
+ 
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.CompanyProjectID" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

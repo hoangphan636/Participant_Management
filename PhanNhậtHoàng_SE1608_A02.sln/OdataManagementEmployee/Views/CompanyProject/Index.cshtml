@@ -1,0 +1,121 @@
+﻿@model IEnumerable< BusinessObject.CompanyProject>
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Index";
+
+}
+@{
+    // Lấy giá trị Session
+    string customerName = Context.Session.GetString("EmailAddress");
+    
+}
+<h1>Index</h1>
+
+<h1>Welcome, @customerName!</h1>
+@if (customerName.Equals("admin@FURentalSystem.com"))
+{
+    <div class="search-container">
+        <form asp-action="Search">
+            <input type="text" name="searchQuery" placeholder="Search..." class="search-input">
+            <button type="submit" class="btn btn-primary search-button">Search</button>
+        </form>
+    </div>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<div class="logout-container">
+    <a asp-action="Logout" class="btn btn-primary">Log out</a>
+    <a asp-action="Employee" class="btn btn-primary">Employee Manage</a>
+    <a asp-action="Participating" class="btn btn-primary">Participating Manage</a>
+</div>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CompanyProjectID)</th>
+            <th>@Html.DisplayNameFor(model => model.ProjectName)</th>
+            <th>@Html.DisplayNameFor(model => model.ProjectDescription)</th>
+            <th>@Html.DisplayNameFor(model => model.EstimatedStartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.ExpectedEndDate)</th>
+         
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.CompanyProjectID)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProjectName)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProjectDescription)</td>
+                <td>@Html.DisplayFor(modelItem => item.EstimatedStartDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.ExpectedEndDate)</td>
+               
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.CompanyProjectID }, new { @class = "btn btn-primary" })
+                    @if (customerName.Equals("admin@FURentalSystem.com"))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CompanyProjectID }, new { @class = "btn btn-danger" })
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-danger {
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+</style>

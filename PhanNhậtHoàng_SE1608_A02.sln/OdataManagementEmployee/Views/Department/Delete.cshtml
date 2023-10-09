@@ -1,0 +1,66 @@
+﻿@model BusinessObject.Departmennt
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<style>
+    .details-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .details-label {
+        flex-basis: 30%;
+    }
+
+    .details-value {
+        flex-basis: 70%;
+    }
+</style>
+<h1>Delete</h1>
+
+
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <div class="details-row">
+        <div class="details-label">
+            @Html.DisplayNameFor(model => model.DepartmentID)
+        </div>
+        <div class="details-value">
+            @Html.DisplayFor(model => model.DepartmentID)
+        </div>
+    </div>
+
+    <div class="details-row">
+        <div class="details-label">
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </div>
+        <div class="details-value">
+            @Html.DisplayFor(model => model.DepartmentName)
+        </div>
+    </div>
+
+    <div class="details-row">
+        <div class="details-label">
+            @Html.DisplayNameFor(model => model.DepartmentDescription)
+        </div>
+        <div class="details-value">
+            @Html.DisplayFor(model => model.DepartmentDescription)
+        </div>
+    </div>
+
+  
+
+
+    <form asp-action="Deleted" asp-route-id="@Model.DepartmentID" class="confirm-delete">
+        <input type="hidden" name="id" value="@Model.DepartmentID" />
+        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" /> |
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </form>
+
+
+</div>
+

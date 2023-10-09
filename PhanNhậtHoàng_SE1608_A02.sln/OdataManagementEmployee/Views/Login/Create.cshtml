@@ -1,0 +1,107 @@
+﻿@model BusinessObject.Employee
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Index";
+
+}
+@*@{
+    // Lấy giá trị Session
+    string customerName = Context.Session.GetString("CustomerName");
+
+}*@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+
+</head>
+
+
+<body>
+   @* <h3><span style="color: red;">@customerName</span></h3>*@
+
+    <h3>Login Form</h3>
+    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
+    {
+        <p>@ViewData["ErrorMessage"]</p>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <p>@ViewBag.Message</p>
+    }
+    <form method="post" asp-action="Login">
+        <div>
+            <label>Email:</label>
+            <input type="text" asp-for="EmailAddress" />
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" asp-for="Password" />
+        </div>
+        @if (!string.IsNullOrEmpty(TempData["learn"] as string))
+        {
+            <h3 style="color: red;">@TempData["learn"]</h3>
+        }
+        <div>
+            <input type="submit" value="Login" />
+        </div>
+    </form>
+
+</body>
+</html>
+<style>
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .logout-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .btn-danger {
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+</style>

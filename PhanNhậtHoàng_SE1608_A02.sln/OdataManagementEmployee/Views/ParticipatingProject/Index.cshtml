@@ -1,0 +1,119 @@
+﻿@model IEnumerable< BusinessObject.ParticipatingProject>
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Index";
+
+}
+@{
+    // Lấy giá trị Session
+    string customerName = Context.Session.GetString("EmailAddress");
+
+}
+<h1>Index</h1>
+@if (customerName.Equals("admin@FURentalSystem.com"))
+{
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+
+<h1>Welcome, @customerName!</h1>
+
+<div class="logout-container">
+    <a asp-action="Logout" class="btn btn-primary">Log out</a>
+    <a asp-action="Employees" class="btn btn-primary">Employee Manage</a>
+    <a asp-action="CompanyProjects" class="btn btn-primary">Company Project Manage</a>
+</div>
+
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CompanyProjectID)</th>
+            <th>@Html.DisplayNameFor(model => model.EmployeeID)</th>
+            <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+            <th>@Html.DisplayNameFor(model => model.ProjectRole)</th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.CompanyProjectID)</td>
+                <td>@Html.DisplayFor(modelItem => item.EmployeeID)</td>
+                <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProjectRole)</td>
+
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.CompanyProjectID }, new { @class = "btn btn-primary" })
+                    @if (customerName.Equals("admin@FURentalSystem.com"))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CompanyProjectID }, new { @class = "btn btn-danger" })
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-danger {
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+</style>
